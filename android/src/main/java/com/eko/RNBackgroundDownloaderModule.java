@@ -78,8 +78,15 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
     super(reactContext);
 
     loadConfigMap();
+    
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .readTimeout(3000000, TimeUnit.MILLISECONDS)
+            .connectTimeout(10000, TimeUnit.MILLISECONDS)
+            .build();
+    
     FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(this.getReactApplicationContext())
             .setDownloadConcurrentLimit(4)
+            .setHttpDownloader(new OkHttpDownloader(okHttpClient))
             .setNamespace("RNBackgroundDownloader")
             .build();
     fetch = Fetch.Impl.getInstance(fetchConfiguration);
