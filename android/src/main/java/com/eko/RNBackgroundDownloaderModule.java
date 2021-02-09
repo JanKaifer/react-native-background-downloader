@@ -26,7 +26,6 @@ import com.tonyodev.fetch2core.DownloadBlock;
 import com.tonyodev.fetch2core.Func;
 import com.tonyodev.fetch2okhttp.OkHttpDownloader;
 
-
 import okhttp3.OkHttpClient;
 
 import org.jetbrains.annotations.NotNull;
@@ -41,6 +40,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
 
