@@ -24,7 +24,7 @@ import com.tonyodev.fetch2.Request;
 import com.tonyodev.fetch2.Status;
 import com.tonyodev.fetch2core.DownloadBlock;
 import com.tonyodev.fetch2core.Func;
-import com.tonyodev.fetch2core.OkHttpDownloader;
+import com.tonyodev.fetch2okhttp.OkHttpDownloader;
 
 
 import okhttp3.OkHttpClient;
