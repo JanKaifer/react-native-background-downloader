@@ -59,14 +59,6 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
   private static final int ERR_FILE_NOT_FOUND = 3;
   private static final int ERR_OTHERS = 100;
 
-    private class HttpUrlConnectionPreferences {
-      int connectTimeout = 15_000;
-      boolean usesCache = false;
-      boolean usesDefaultCache = false;
-      boolean followsRedirect = true;
-    }
-  }
-
   private static Map<Status, Integer> stateMap = new HashMap<Status, Integer>() {{
     put(Status.DOWNLOADING, TASK_RUNNING);
     put(Status.COMPLETED, TASK_COMPLETED);
