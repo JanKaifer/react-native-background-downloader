@@ -58,8 +58,8 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
   private static final int ERR_FILE_NOT_FOUND = 3;
   private static final int ERR_OTHERS = 100;
 
-  open class CustomDownloader extends HttpUrlConnectionDownloader {
-    open class HttpUrlConnectionPreferences {
+  private class CustomDownloader extends HttpUrlConnectionDownloader {
+    private class HttpUrlConnectionPreferences {
       var readTimeout = 2 * 60 * 1000
       var connectTimeout = 15_000
       var usesCache = false
