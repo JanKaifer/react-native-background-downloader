@@ -60,11 +60,11 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
 
   private class CustomDownloader extends HttpUrlConnectionDownloader {
     private class HttpUrlConnectionPreferences {
-      var readTimeout = 2 * 60 * 1000
-      var connectTimeout = 15_000
-      var usesCache = false
-      var usesDefaultCache = false
-      var followsRedirect = true
+      int readTimeout = 2 * 60 * 1000;
+      int connectTimeout = 15_000;
+      boolean usesCache = false;
+      boolean usesDefaultCache = false;
+      boolean followsRedirect = true;
     }
   }
 
