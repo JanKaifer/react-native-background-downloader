@@ -24,9 +24,9 @@ import com.tonyodev.fetch2.Request;
 import com.tonyodev.fetch2.Status;
 import com.tonyodev.fetch2core.DownloadBlock;
 import com.tonyodev.fetch2core.Func;
-import com.tonyodev.fetch2okhttp.OkHttpDownloader;
+// import com.tonyodev.fetch2okhttp.OkHttpDownloader;
 
-import okhttp3.OkHttpClient;
+// import okhttp3.OkHttpClient;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -83,14 +83,17 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
 
     loadConfigMap();
     
-    OkHttpClient okHttpClient = new OkHttpClient.Builder()
-            .readTimeout(3000000, TimeUnit.MILLISECONDS)
-            .connectTimeout(10000, TimeUnit.MILLISECONDS)
-            .build();
+    // OkHttpClient okHttpClient = new OkHttpClient.Builder()
+    //         .readTimeout(3000000, TimeUnit.MILLISECONDS)
+    //         .connectTimeout(10000, TimeUnit.MILLISECONDS)
+    //         .build();
+    HttpUrlConnectionDownloader httpClient = new HttpUrlConnectionDownloader();
+    httpClient.connectionPrefs.readTimeout = 3 * 60 * 1000;
     
     FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(this.getReactApplicationContext())
             .setDownloadConcurrentLimit(4)
-            .setHttpDownloader(new OkHttpDownloader(okHttpClient))
+            .setHttpDownloader(httpClient)
+            // .setHttpDownloader(new OkHttpDownloader(okHttpClient))
             .setNamespace("RNBackgroundDownloader")
             .build();
     fetch = Fetch.Impl.getInstance(fetchConfiguration);
