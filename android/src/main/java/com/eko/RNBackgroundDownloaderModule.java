@@ -63,7 +63,7 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
 
   private class CustomHttpUrlConnectionDownloader extends HttpUrlConnectionDownloader {
       public void setPrefs() {
-        Object cpCopy = FieldUtils.readField(this, 'connectionPrefs', true);
+        Object cpCopy = FieldUtils.readField(this, "connectionPrefs", true);
         FieldUtils.writeField(cpCopy, "readTimeout", 3 * 60 * 1000, true);
         FieldUtils.writeField(this, "connectionPrefs", cpCopy, true);
       }
