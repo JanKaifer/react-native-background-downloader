@@ -93,9 +93,10 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
     //         .readTimeout(3000000, TimeUnit.MILLISECONDS)
     //         .connectTimeout(10000, TimeUnit.MILLISECONDS)
     //         .build();
-    HttpUrlConnectionDownloader httpClient = new HttpUrlConnectionDownloader(
-      new CustomHttpUrlConnectionPreferences()
-    );
+    HttpUrlConnectionPreferences httpClientPrefs = new HttpUrlConnectionPreferences();
+    httpClientPrefs.readTimeout =  3 * 60 * 1000;
+
+    HttpUrlConnectionDownloader httpClient = new HttpUrlConnectionDownloader(httpClientPrefs);
 
     FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(this.getReactApplicationContext())
             .setDownloadConcurrentLimit(4)
