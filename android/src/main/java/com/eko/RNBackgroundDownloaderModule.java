@@ -26,6 +26,7 @@ import com.tonyodev.fetch2core.DownloadBlock;
 import com.tonyodev.fetch2core.Func;
 // import com.tonyodev.fetch2okhttp.OkHttpDownloader;
 import com.tonyodev.fetch2.HttpUrlConnectionDownloader;
+import com.tonyodev.fetch2.HttpUrlConnectionDownloader.HttpUrlConnectionPreferences;
 
 // import okhttp3.OkHttpClient;
 
@@ -58,9 +59,7 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
   private static final int ERR_FILE_NOT_FOUND = 3;
   private static final int ERR_OTHERS = 100;
 
-  private class CustomDownloader extends HttpUrlConnectionDownloader {
     private class HttpUrlConnectionPreferences {
-      int readTimeout = 2 * 60 * 1000;
       int connectTimeout = 15_000;
       boolean usesCache = false;
       boolean usesDefaultCache = false;
@@ -98,7 +97,11 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
     //         .readTimeout(3000000, TimeUnit.MILLISECONDS)
     //         .connectTimeout(10000, TimeUnit.MILLISECONDS)
     //         .build();
-    HttpUrlConnectionDownloader httpClient = new CustomDownloader();
+    HttpUrlConnectionDownloader httpClient = new HttpUrlConnectionDownloader(
+      new HttpUrlConnectionPreferences(
+        readTimeout = 2 * 60 * 1000
+      )
+    );
 
     FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(this.getReactApplicationContext())
             .setDownloadConcurrentLimit(4)
