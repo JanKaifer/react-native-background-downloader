@@ -30,6 +30,8 @@ import com.tonyodev.fetch2.HttpUrlConnectionDownloader.HttpUrlConnectionPreferen
 
 // import okhttp3.OkHttpClient;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -61,7 +63,7 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
 
   private class CustomHttpUrlConnectionDownloader extends HttpUrlConnectionDownloader {
       public void setPrefs() {
-        connectionPrefs.readTimeout = 3 * 60 * 1000;
+        FieldUtils.writeField(connectionPrefs, "readTimeout", 3 * 60 * 1000, true);
       }
   }
 
