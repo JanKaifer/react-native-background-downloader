@@ -58,6 +58,16 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
   private static final int ERR_FILE_NOT_FOUND = 3;
   private static final int ERR_OTHERS = 100;
 
+  open class CustomDownloader extends HttpUrlConnectionDownloader {
+    open class HttpUrlConnectionPreferences {
+      var readTimeout = 2 * 60 * 1000
+      var connectTimeout = 15_000
+      var usesCache = false
+      var usesDefaultCache = false
+      var followsRedirect = true
+    }
+  }
+
   private static Map<Status, Integer> stateMap = new HashMap<Status, Integer>() {{
     put(Status.DOWNLOADING, TASK_RUNNING);
     put(Status.COMPLETED, TASK_COMPLETED);
@@ -88,9 +98,8 @@ public class RNBackgroundDownloaderModule extends ReactContextBaseJavaModule imp
     //         .readTimeout(3000000, TimeUnit.MILLISECONDS)
     //         .connectTimeout(10000, TimeUnit.MILLISECONDS)
     //         .build();
-    HttpUrlConnectionDownloader httpClient = new HttpUrlConnectionDownloader();
-    httpClient.connectionPrefs.readTimeout = 3 * 60 * 1000;
-    
+    HttpUrlConnectionDownloader httpClient = new CustomDownloader();
+
     FetchConfiguration fetchConfiguration = new FetchConfiguration.Builder(this.getReactApplicationContext())
             .setDownloadConcurrentLimit(4)
             .setHttpDownloader(httpClient)
